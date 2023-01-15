@@ -30,7 +30,7 @@ body {
 
     width: 100vw;
 
-    margin-top: 8rem;
+    margin: 1rem 0;
 }
 
 .matrix_row {
@@ -44,4 +44,25 @@ body {
 
     width: 5rem;
     height: 5rem;
+}
+
+.keyboard_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+
+    div {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .keyboard_keys {
+        background-color: $grey;
+
+        padding: 1rem 1.5rem;
+
+        display: grid;
+        place-items: center;
+    }
 }
