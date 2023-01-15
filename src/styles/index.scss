@@ -58,9 +58,11 @@ body {
     }
 
     .keyboard_keys {
+        border: none;
         background-color: $grey;
+        color: inherit;
 
-        padding: 1rem 1.5rem;
+        padding: 1.2rem 1.6rem;
 
         display: grid;
         place-items: center;
