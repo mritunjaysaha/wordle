@@ -21,3 +21,27 @@ body {
     height: 100vh;
     width: 100vw;
 }
+
+.matrix_container {
+    display: grid;
+    place-items: center;
+
+    gap: 1rem;
+
+    width: 100vw;
+
+    margin-top: 8rem;
+}
+
+.matrix_row {
+    display: flex;
+
+    gap: 1rem;
+}
+
+.matrix_cell {
+    border: 0.1rem solid $border;
+
+    width: 5rem;
+    height: 5rem;
+}
