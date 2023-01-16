@@ -1,0 +1,57 @@
+@import "../../styles/abstract/abstracts";
+
+.theme_switch {
+    position: absolute;
+    right: 4rem;
+    top: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.label {
+    position: relative;
+
+    display: flex;
+    border-radius: 5rem;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 3.4rem;
+    height: 2.2rem;
+
+    border: 0.1rem solid $border;
+
+    padding: 0.1rem 0.6rem;
+
+    cursor: pointer;
+}
+
+.ball {
+    width: 1.6rem;
+    height: 1.6rem;
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+.ball_dark {
+    background-color: $darkGreen;
+}
+
+.ball_light {
+    background-color: $grey;
+}
+
+/*  target the elemenent after the label*/
+.checkbox:checked + .label .ball {
+    transform: translateX(1.2rem);
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { NavBar } from "../navbar/navbar";
 
@@ -86,11 +86,13 @@ function Keyboard() {
 }
 
 export default function App() {
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState(
+        JSON.parse(localStorage.getItem("isDark")) ? "dark" : "light"
+    );
 
     return (
         <div className={`app ${theme}_theme`}>
-            <NavBar />
+            <NavBar theme={theme} setTheme={setTheme} />
             <Matrix rows={6} columns={5} />
             <Keyboard />
         </div>
