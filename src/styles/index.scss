@@ -44,6 +44,9 @@ body {
 
     width: 5rem;
     height: 5rem;
+
+    display: grid;
+    place-items: center;
 }
 
 .keyboard_container {
@@ -67,4 +70,16 @@ body {
         display: grid;
         place-items: center;
     }
+}
+
+.green {
+    background-color: $darkGreen;
+}
+
+.yellow {
+    background-color: $darkYellow;
+}
+
+.grey {
+    background-color: $darkGrey;
 }
