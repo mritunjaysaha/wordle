@@ -7,8 +7,6 @@ import { BsBackspace } from "react-icons/bs";
 
 const WORD_LENGTH = 5;
 
-const wordOfTheDay = "WIPED";
-
 const keyboardArr = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -27,6 +25,26 @@ const fetchWord = (word) => {
 
 const allKeys = keyboardArr.flat();
 
+const wordList = [
+    "WIPER",
+    "WIPED",
+    "RIDER",
+    "RACER",
+    "ENTER",
+    "LINUX",
+    "STEAM",
+    "LUCKY",
+    "CHAMP",
+    "SILKY",
+    "STICK",
+    "CHURN",
+    "CHEAT",
+];
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
 export default function App() {
     let letterIndex = useRef(0);
     let round = useRef(0);
@@ -34,6 +52,8 @@ export default function App() {
     const [theme, setTheme] = useState(
         JSON.parse(localStorage.getItem("isDark")) ? "dark" : "light"
     );
+
+    const [wordOfTheDay, setWordOfTheDay] = useState("");
 
     const [guesses, setGuesses] = useState({
         0: Array.from({ length: WORD_LENGTH }).fill(""),
@@ -169,6 +189,8 @@ export default function App() {
     useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
 
+        setWordOfTheDay(wordList[getRandomInt(wordList.length)]);
+
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
@@ -177,7 +199,7 @@ export default function App() {
     return (
         <div className={`app ${theme}_theme`}>
             <NavBar theme={theme} setTheme={setTheme} />
-
+            {console.log({ wordOfTheDay })}
             <div className="matrix_container">
                 {Object.values(guesses).map((row, index) => (
                     <div key={index} className="matrix_row">
