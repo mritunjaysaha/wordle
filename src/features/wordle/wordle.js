@@ -45,9 +45,42 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+
+function ResultModal({ text }) {
+    return <div className="result_modal">{text}</div>
+}
+
 export function Wordle() {
     let letterIndex = useRef(0);
     let round = useRef(0);
+
+    const [isWinner, setIsWinner] = useState(false)
+    const [isLost, setIsLost] = useState(false)
+    const [isError, setIsError] = useState(false)
+
+    const handleModal = (type) => {
+
+        switch (type) {
+            case "win":
+                setIsWinner(true)
+                setTimeout(() => {
+                    setIsWinner(false)
+                }, 2000)
+                return;
+            case "lost":
+                setIsLost(true)
+                setTimeout(() => {
+                    setIsLost(false)
+                }, 2000)
+                return;
+
+            case "error":
+                setIsError(true);
+                setTimeout(() => {
+                    setIsError(false)
+                }, 2000)
+        }
+    }
 
     const [wordOfTheDay, setWordOfTheDay] = useState("");
 
@@ -82,7 +115,7 @@ export function Wordle() {
     console.log("wordle mounted", { wordOfTheDay });
 
     const win = () => {
-        console.log("winner");
+        handleModal("win")
     };
 
     const publish = (pressedKey) => {
@@ -106,6 +139,8 @@ export function Wordle() {
 
             if (Array.isArray(validWord)) {
                 submit();
+            } else {
+                handleModal("error")
             }
         } else if (pressedKey === "BACKSPACE") {
             erase();
@@ -184,13 +219,13 @@ export function Wordle() {
     };
 
     const loss = () => {
-        console.log("lost", { wordOfTheDay });
+        handleModal("lost")
     };
 
     const handleKeyDown = (e) => {
         const pressedKey = e.key.toUpperCase();
-        console.log({ pressedKey });
         if (allKeys.includes(pressedKey)) {
+            console.log({ pressedKey });
             enterGuess(pressedKey);
         }
     };
@@ -261,6 +296,10 @@ export function Wordle() {
                     ))}
                 </div>
             </div>
+
+            {isWinner && <ResultModal info="Congratulations!!!" />}
+            {isLost && <ResultModal text={wordOfTheDay} />}
+            {isError && <ResultModal text="Not a word" />}
         </div>
     );
 }
