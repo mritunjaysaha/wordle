@@ -40,13 +40,14 @@ body {
 }
 
 .matrix_cell {
-    border: 0.1rem solid $border;
-
     width: 5rem;
     height: 5rem;
 
     display: grid;
     place-items: center;
+
+    font-size: 3.2rem;
+    font-weight: bold;
 }
 
 .keyboard_container {
@@ -60,30 +61,33 @@ body {
         gap: 1rem;
     }
 
-    .keyboard_keys {
-        border: none;
-        background-color: $grey;
-        color: inherit;
-
-        padding: 1.2rem 1.6rem;
-
-        display: grid;
-        place-items: center;
-    }
-
     @include breakpoint(x_small) {
         font-size: 1.2rem;
 
         div {
             gap: 0.4rem;
         }
-
-        .keyboard_keys {
-            padding: 0.8rem 1.2rem;
-        }
     }
 }
+.keyboard_keys {
+    border: none;
+    background-color: $grey;
+    color: inherit;
 
+    padding: 1.2rem 1.6rem;
+
+    height: 6rem;
+    min-width: 4rem;
+
+    border-radius: 1rem;
+
+    display: grid;
+    place-items: center;
+
+    @include breakpoint(x_small) {
+        padding: 0.8rem 1.2rem;
+    }
+}
 .green {
     background-color: $darkGreen;
 }
