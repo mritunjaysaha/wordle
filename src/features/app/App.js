@@ -21,25 +21,7 @@ export default function App() {
 
     return (
         <div className={`app ${theme}_theme`}>
-            <Helmet>
-                <meta charSet="utf-8" />
-                <title>Wordle</title>
-                <meta property="og:title" content="Wordle" />
-                <meta
-                    property="og:description"
-                    content="Guess a 5 letter word in 6 tries"
-                />
-                <meta
-                    property="og:image"
-                    content="https://static.tnn.in/thumb/msid-96634355,imgsize-491555,width-450,height-250,false/96634355.jpg"
-                />
-                <meta
-                    property="og:url"
-                    content="https://wordle-eta.vercel.app/"
-                />
-                <meta property="og:type" content="website" />
-                <meta name="twitter:card" content="Wordle | Mritunjay" />
-            </Helmet>
+            <Helmet></Helmet>
             <NavBar
                 theme={theme}
                 setTheme={setTheme}
