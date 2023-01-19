@@ -48,6 +48,9 @@ body {
 
     font-size: 3.2rem;
     font-weight: bold;
+
+    border: 1px solid $border;
+    border-radius: 0.5rem;
 }
 
 .keyboard_container {
