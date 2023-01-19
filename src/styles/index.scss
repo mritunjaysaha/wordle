@@ -58,15 +58,11 @@ body {
 
     div {
         display: flex;
-        gap: 1rem;
+        gap: 0.4rem;
     }
 
     @include breakpoint(x_small) {
         font-size: 1.2rem;
-
-        div {
-            gap: 0.4rem;
-        }
     }
 }
 .keyboard_keys {
