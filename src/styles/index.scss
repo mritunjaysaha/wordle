@@ -85,7 +85,8 @@ body {
     place-items: center;
 
     @include breakpoint(x_small) {
-        padding: 0.8rem 1.2rem;
+        min-width: 3rem;
+        padding: 0.8rem 1.4rem;
     }
 }
 .green {
