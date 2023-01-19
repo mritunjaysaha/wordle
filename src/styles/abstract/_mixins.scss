@@ -1,7 +1,11 @@
 @mixin theme($color, $background) {
     background-color: $background;
-
     color: $color;
+
+    button,
+    div {
+        color: $color !important;
+    }
 }
 
 @mixin breakpoint($point) {

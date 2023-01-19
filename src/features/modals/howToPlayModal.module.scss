@@ -1,0 +1,138 @@
+@import "../../styles/abstract/abstracts";
+
+.modal_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    place-items: center;
+
+    z-index: 10;
+}
+
+.modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    background-color: $black;
+
+    height: 80vh;
+    width: 30vw;
+
+    padding: 6rem 4rem;
+
+    border-radius: 1rem;
+
+    color: inherit !important;
+
+    .modal_close {
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+
+        color: $white;
+
+        font-size: 4rem;
+    }
+
+    header {
+        margin-bottom: 2rem;
+        h3 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 3.2rem;
+
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 2.4rem;
+        }
+    }
+
+    ul {
+        list-style: disc;
+        padding-left: 2rem;
+
+        margin-bottom: 2rem;
+    }
+
+    .modal_examples_bold {
+        font-weight: 700;
+
+        margin-bottom: 2rem;
+    }
+    .modal_examples {
+        display: flex;
+        flex-direction: column;
+
+        gap: 2rem;
+
+        .modal_row {
+            display: flex;
+
+            gap: 1rem;
+        }
+
+        .modal_cell {
+            display: grid;
+            place-items: center;
+
+            width: 4rem;
+            height: 4rem;
+
+            border: 0.1rem solid $border;
+        }
+    }
+
+    .modal_individual_examples {
+        display: flex;
+        flex-direction: column;
+
+        gap: 1rem;
+
+        span {
+            font-weight: 600;
+        }
+    }
+}
+
+.modal_green {
+    background: $darkGreen;
+}
+
+.modal_yellow {
+    background: $darkYellow;
+}
+
+.modal_grey {
+    background: $darkGrey;
+}
+
+.modal_dark {
+    background: rgba(0, 0, 0, 0.5);
+
+    .modal {
+        background-color: $backgroundDarkTheme;
+
+        color: $colorDarkTheme;
+    }
+}
+
+.modal_light {
+    background: $backgroundLightTheme;
+    color: $colorLightTheme;
+
+    .modal {
+        background-color: #f9f9f9;
+
+        color: $colorLightTheme;
+    }
+}
