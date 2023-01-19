@@ -33,5 +33,9 @@
         @media (min-width: 1440px) {
             @content;
         }
+    } @else if $point == xxx_large {
+        @media (min-width: 1900px) {
+            @content;
+        }
     }
 }

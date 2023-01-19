@@ -104,3 +104,9 @@ body {
 
     font-weight: 600;
 }
+
+@include breakpoint(xxx_large) {
+    html {
+        font-size: 100%;
+    }
+}
