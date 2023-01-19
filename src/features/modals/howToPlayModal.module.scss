@@ -24,12 +24,22 @@
     height: 80vh;
     width: 30vw;
 
+    @include breakpoint(medium) {
+        width: 70vw;
+    }
+
     padding: 6rem 4rem;
 
     border-radius: 1rem;
 
     color: inherit !important;
+    @include breakpoint(x_small) {
+        width: 90vw;
 
+        height: max-content;
+
+        padding: 4rem 2rem;
+    }
     .modal_close {
         position: absolute;
         top: 1rem;
@@ -55,6 +65,15 @@
             font-weight: 500;
             line-height: 2.4rem;
         }
+
+        @include breakpoint(x_small) {
+            h3 {
+                font-size: 2rem;
+            }
+            h4 {
+                font-size: 1.6rem;
+            }
+        }
     }
 
     ul {
@@ -62,12 +81,20 @@
         padding-left: 2rem;
 
         margin-bottom: 2rem;
+
+        @include breakpoint(x_small) {
+            margin-bottom: 1rem;
+        }
     }
 
     .modal_examples_bold {
         font-weight: 700;
 
         margin-bottom: 2rem;
+
+        @include breakpoint(x_small) {
+            margin-bottom: 1rem;
+        }
     }
     .modal_examples {
         display: flex;
@@ -89,6 +116,10 @@
             height: 4rem;
 
             border: 0.1rem solid $border;
+        }
+
+        @include breakpoint(x_small) {
+            gap: 1rem;
         }
     }
 
