@@ -45,22 +45,21 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-
 function ResultModal({ text }) {
-    return <div className="result_modal">{text}</div>
+    return <div className="result_modal">{text}</div>;
 }
 
 export function Wordle() {
     let letterIndex = useRef(0);
     let round = useRef(0);
 
-    const [isWinner, setIsWinner] = useState(false)
-    const [isLost, setIsLost] = useState(false)
-    const [isError, setIsError] = useState(false)
+    const [isWinner, setIsWinner] = useState(false);
+    const [isLost, setIsLost] = useState(false);
+    const [isError, setIsError] = useState(false);
 
-    const [greenKeys, setGreenKeys] = useState([])
-    const [yellowKeys, setYellowKeys] = useState([])
-    const [greyKeys, setGreyKeys] = useState([])
+    const [greenKeys, setGreenKeys] = useState([]);
+    const [yellowKeys, setYellowKeys] = useState([]);
+    const [greyKeys, setGreyKeys] = useState([]);
 
     const [wordOfTheDay, setWordOfTheDay] = useState("");
 
@@ -82,47 +81,33 @@ export function Wordle() {
         5: Array.from({ length: WORD_LENGTH }).fill(""),
     });
 
-    useEffect(() => {
-        window.addEventListener("keydown", handleKeyDown);
-
-        setWordOfTheDay(wordList[getRandomInt(wordList.length)]);
-
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
-
     console.log("wordle mounted", { wordOfTheDay });
 
-
-
-
     const handleModal = (type) => {
-
         switch (type) {
             case "win":
-                setIsWinner(true)
+                setIsWinner(true);
                 setTimeout(() => {
-                    setIsWinner(false)
-                }, 2000)
+                    setIsWinner(false);
+                }, 2000);
                 return;
             case "lost":
-                setIsLost(true)
+                setIsLost(true);
                 setTimeout(() => {
-                    setIsLost(false)
-                }, 2000)
+                    setIsLost(false);
+                }, 2000);
                 return;
 
             case "error":
                 setIsError(true);
                 setTimeout(() => {
-                    setIsError(false)
-                }, 2000)
+                    setIsError(false);
+                }, 2000);
         }
-    }
+    };
 
     const win = () => {
-        handleModal("win")
+        handleModal("win");
     };
 
     const publish = (pressedKey) => {
@@ -141,13 +126,15 @@ export function Wordle() {
     };
 
     const enterGuess = async (pressedKey) => {
-        if (pressedKey === "ENTER" && !guesses[round.current].includes("")) {
+        if (pressedKey == "ENTER" && !guesses[round.current].includes("")) {
             const validWord = await fetchWord(guesses[round.current].join(""));
+
+            console.log({ validWord });
 
             if (Array.isArray(validWord)) {
                 submit();
             } else {
-                handleModal("error")
+                handleModal("error");
             }
         } else if (pressedKey === "BACKSPACE") {
             erase();
@@ -180,6 +167,8 @@ export function Wordle() {
 
         const tempWord = wordOfTheDay.split("");
 
+        console.log("submit called", { _round, updatedMarkers, tempWord });
+
         const leftoverIndices = [];
 
         tempWord.forEach((letter, index) => {
@@ -189,7 +178,7 @@ export function Wordle() {
                 updatedMarkers[_round][index] = "green";
                 tempWord[index] = "";
 
-                setGreenKeys((prev) => ([...prev, letter]))
+                setGreenKeys((prev) => [...prev, letter]);
             } else {
                 leftoverIndices.push(index);
             }
@@ -205,21 +194,19 @@ export function Wordle() {
             leftoverIndices.forEach((index) => {
                 const guessedLetter = guesses[_round][index];
                 const correctPositionOfLetter = tempWord.indexOf(guessedLetter);
-                console.log({ guessedLetter })
+                console.log({ guessedLetter });
                 if (
                     tempWord.includes(guessedLetter) &&
                     correctPositionOfLetter !== index
                 ) {
                     updatedMarkers[_round][index] = "yellow";
 
-                    setYellowKeys("yellow", guessedLetter)
+                    setYellowKeys("yellow", guessedLetter);
                     tempWord[correctPositionOfLetter] = "";
-
-
                 } else {
                     updatedMarkers[_round][index] = "grey";
 
-                    setGreyKeys((prev) => ([...prev, guessedLetter]))
+                    setGreyKeys((prev) => [...prev, guessedLetter]);
                 }
             });
         }
@@ -234,15 +221,7 @@ export function Wordle() {
     };
 
     const loss = () => {
-        handleModal("lost")
-    };
-
-    const handleKeyDown = (e) => {
-        const pressedKey = e.key.toUpperCase();
-        if (allKeys.includes(pressedKey)) {
-            console.log({ pressedKey });
-            enterGuess(pressedKey);
-        }
+        handleModal("lost");
     };
 
     const handleClick = (key) => {
@@ -252,6 +231,27 @@ export function Wordle() {
             enterGuess(key);
         }
     };
+    const handleKeyDown = (e) => {
+        const pressedKey = e.key.toUpperCase();
+        if (allKeys.includes(pressedKey)) {
+            console.log(
+                { pressedKey },
+                pressedKey === "ENTER",
+                guesses[round.current].includes("")
+            );
+            enterGuess(pressedKey);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyDown);
+
+        setWordOfTheDay(wordList[getRandomInt(wordList.length)]);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
 
     return (
         <div>
@@ -266,37 +266,48 @@ export function Wordle() {
                                 >
                                     {letter}
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 ))}
             </div>
-
-
-
-            {console.log({ greenKeys, greyKeys, yellowKeys })}
-
             <div className="keyboard_container" tabIndex="0">
                 <div>
                     {keyboardArr[0].map((ch, index) => {
                         return (
                             <button
                                 key={index}
-                                className={`keyboard_keys ${greenKeys.includes(ch) ? "green" : yellowKeys.includes(ch) ? "yellow" : greyKeys.includes(ch) ? "grey" : ""}`}
+                                className={`keyboard_keys ${
+                                    greenKeys.includes(ch)
+                                        ? "green"
+                                        : yellowKeys.includes(ch)
+                                        ? "yellow"
+                                        : greyKeys.includes(ch)
+                                        ? "grey"
+                                        : ""
+                                }`}
                                 onClick={() => {
                                     handleClick(ch);
                                 }}
                             >
                                 {ch}
                             </button>
-                        )
+                        );
                     })}
                 </div>
                 <div>
                     {keyboardArr[1].map((ch, index) => (
                         <button
                             key={index}
-                            className={`keyboard_keys ${greenKeys.includes(ch) ? "green" : yellowKeys.includes(ch) ? "yellow" : greyKeys.includes(ch) ? "grey" : ""}`}
+                            className={`keyboard_keys ${
+                                greenKeys.includes(ch)
+                                    ? "green"
+                                    : yellowKeys.includes(ch)
+                                    ? "yellow"
+                                    : greyKeys.includes(ch)
+                                    ? "grey"
+                                    : ""
+                            }`}
                             onClick={() => {
                                 handleClick(ch);
                             }}
@@ -309,7 +320,15 @@ export function Wordle() {
                     {keyboardArr[2].map((ch, index) => (
                         <button
                             key={index}
-                            className={`keyboard_keys ${greenKeys.includes(ch) ? "green" : yellowKeys.includes(ch) ? "yellow" : greyKeys.includes(ch) ? "grey" : ""}`}
+                            className={`keyboard_keys ${
+                                greenKeys.includes(ch)
+                                    ? "green"
+                                    : yellowKeys.includes(ch)
+                                    ? "yellow"
+                                    : greyKeys.includes(ch)
+                                    ? "grey"
+                                    : ""
+                            }`}
                             onClick={() => {
                                 handleClick(ch);
                             }}
@@ -320,7 +339,7 @@ export function Wordle() {
                 </div>
             </div>
 
-            {isWinner && <ResultModal info="Congratulations!!!" />}
+            {isWinner && <ResultModal text="Congratulations!!!" />}
             {isLost && <ResultModal text={wordOfTheDay} />}
             {isError && <ResultModal text="Not a word" />}
         </div>
