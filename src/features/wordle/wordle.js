@@ -39,6 +39,18 @@ const wordList = [
     "STICK",
     "CHURN",
     "CHEAT",
+    "HELLO",
+    "WORLD",
+    "WHALE",
+    "SHELL",
+    "SHELF",
+    "AWAIT",
+    "ARRAY",
+    "MODAL",
+    "PROPS",
+    "EVERY",
+    "WHITE",
+    "GREEN",
 ];
 
 function getRandomInt(max) {
