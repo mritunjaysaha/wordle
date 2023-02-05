@@ -51,7 +51,14 @@ const wordList = [
     "EVERY",
     "WHITE",
     "GREEN",
+    "TROLL",
+    "BLACK",
+    "CHUNK",
+    "CHILL",
 ];
+
+
+console.log(wordList)
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -115,6 +122,12 @@ export function Wordle() {
                 setTimeout(() => {
                     setIsError(false);
                 }, 2000);
+                return;
+            default:
+                setIsError(true);
+                setTimeout(() => {
+                    setIsError(false);
+                }, 2000);
         }
     };
 
@@ -143,7 +156,8 @@ export function Wordle() {
 
             console.log({ validWord });
 
-            if (Array.isArray(validWord)) {
+            // if (Array.isArray(validWord)) {
+            if (wordList.includes(guesses[round.current].join(""))) {
                 submit();
             } else {
                 handleModal("error");
@@ -289,15 +303,14 @@ export function Wordle() {
                         return (
                             <button
                                 key={index}
-                                className={`keyboard_keys ${
-                                    greenKeys.includes(ch)
-                                        ? "green"
-                                        : yellowKeys.includes(ch)
+                                className={`keyboard_keys ${greenKeys.includes(ch)
+                                    ? "green"
+                                    : yellowKeys.includes(ch)
                                         ? "yellow"
                                         : greyKeys.includes(ch)
-                                        ? "grey"
-                                        : ""
-                                }`}
+                                            ? "grey"
+                                            : ""
+                                    }`}
                                 onClick={() => {
                                     handleClick(ch);
                                 }}
@@ -311,15 +324,14 @@ export function Wordle() {
                     {keyboardArr[1].map((ch, index) => (
                         <button
                             key={index}
-                            className={`keyboard_keys ${
-                                greenKeys.includes(ch)
-                                    ? "green"
-                                    : yellowKeys.includes(ch)
+                            className={`keyboard_keys ${greenKeys.includes(ch)
+                                ? "green"
+                                : yellowKeys.includes(ch)
                                     ? "yellow"
                                     : greyKeys.includes(ch)
-                                    ? "grey"
-                                    : ""
-                            }`}
+                                        ? "grey"
+                                        : ""
+                                }`}
                             onClick={() => {
                                 handleClick(ch);
                             }}
@@ -332,15 +344,14 @@ export function Wordle() {
                     {keyboardArr[2].map((ch, index) => (
                         <button
                             key={index}
-                            className={`keyboard_keys ${
-                                greenKeys.includes(ch)
-                                    ? "green"
-                                    : yellowKeys.includes(ch)
+                            className={`keyboard_keys ${greenKeys.includes(ch)
+                                ? "green"
+                                : yellowKeys.includes(ch)
                                     ? "yellow"
                                     : greyKeys.includes(ch)
-                                    ? "grey"
-                                    : ""
-                            }`}
+                                        ? "grey"
+                                        : ""
+                                }`}
                             onClick={() => {
                                 handleClick(ch);
                             }}
